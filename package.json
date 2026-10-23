@@ -17,5 +17,10 @@
   "bugs": {
     "url": "https://github.com/Rahulp4173/project1/issues"
   },
-  "homepage": "https://github.com/Rahulp4173/project1#readme"
+  "homepage": "https://github.com/Rahulp4173/project1#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.29.7",
+    "@babel/core": "^7.29.7",
+    "@babel/preset-react": "^7.29.7"
+  }
 }

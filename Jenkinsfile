@@ -11,14 +11,13 @@ pipeline {
     }
 
     stages {
-        stage('Checkout from GitHub') {
+        stage('Checkout GitHub') {
             steps {
-                echo 'Downloading source code from GitHub'
                 checkout scm
             }
         }
 
-        stage('Check Node.js and npm') {
+        stage('Check Node.js') {
             steps {
                 sh 'node --version'
                 sh 'npm --version'
@@ -31,25 +30,21 @@ pipeline {
             }
         }
 
-        stage('Check JavaScript Files') {
+        stage('Compile JSX') {
             steps {
-                sh 'node --check src/main.js'
-                sh 'node --check src/r1.js'
+                sh 'npx babel src/main.js --out-file /tmp/main.js'
+                sh 'npx babel src/r1.js --out-file /tmp/r1.js'
             }
         }
     }
 
     post {
         success {
-            echo 'SUCCESS: Node.js checks completed!'
+            echo 'SUCCESS: JSX files compiled successfully!'
         }
 
         failure {
             echo 'FAILED: Check the Console Output.'
-        }
-
-        always {
-            echo 'Jenkins pipeline finished.'
         }
     }
 }
