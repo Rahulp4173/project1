@@ -11,33 +11,41 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
+        stage('Checkout from GitHub') {
             steps {
                 echo 'Downloading source code from GitHub'
                 checkout scm
             }
         }
 
-        stage('Install Dependencies') {
+        stage('Check Node.js and npm') {
             steps {
-                bat 'npm ci'
+                sh 'node --version'
+                sh 'npm --version'
             }
         }
 
-        stage('Build React App') {
+        stage('Install Dependencies') {
             steps {
-                bat 'npm run build'
+                sh 'npm ci'
+            }
+        }
+
+        stage('Check JavaScript Files') {
+            steps {
+                sh 'node --check src/main.js'
+                sh 'node --check src/r1.js'
             }
         }
     }
 
     post {
         success {
-            echo 'SUCCESS: React application built successfully!'
+            echo 'SUCCESS: Node.js checks completed!'
         }
 
         failure {
-            echo 'FAILED: Check the Console Output for errors.'
+            echo 'FAILED: Check the Console Output.'
         }
 
         always {
