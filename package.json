@@ -1,10 +1,11 @@
 {
   "name": "project1",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Node.js project for Jenkins CI",
+  "main": "src/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/main.js",
+    "test": "node --check src/main.js && node --check src/r1.js"
   },
   "repository": {
     "type": "git",
